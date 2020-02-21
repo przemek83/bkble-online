@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <title>Bkble Online</title>
+        <meta name="description" content="Free to use Battleknight farming tool. Get more loot from attacks by detecting loot change."/>
+        <meta name="keywords" content="bkble, online, battleknight, farming, tool, help, farm, bot, hack, cheat"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+        <script type="text/javascript" src="js/yetii.js"></script>
+        <script type="text/javascript" src="js/ops.js" ></script>
+    </head>
+
+    <body>
+        <!-- Facebook -->
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) 
+        {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.async=true;
+              js.src = "//connect.facebook.net/en_EN/all.js#xfbml=1";
+              fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+
+        <!-- Twitter -->
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.async=true;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+        <div class="external">
+            <center>
+                <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:970px;height:90px"
+                     data-ad-client="ca-pub-0172227052232863"
+                     data-ad-slot="6827696463"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </center>
+
+            <div id="main">
+                <div class="sidebar">
+                    <center>
+                        <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:160px;height:600px"
+                             data-ad-client="ca-pub-0172227052232863"
+                             data-ad-slot="3734629262"></ins>
+                        <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </center>
+                   
+
+                </div>
+
+                <div class="content">
+                    <div id="tab-container-1">
+                        <ul id="tab-container-1-nav">
+                            <li><a href="#bkbleOnline">Bkble online</a></li>
+                            <li><a href="#howTo">Instructions & how to</a></li>
+                            <li><a href="#ideasContact">Got idea? Share it!</a></li>
+                        </ul>
+                        <div class="tab" id="bkbleOnline">
+                             <table>
+                                <tr>
+                                    <td>
+                                        <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+                                    </td>
+                                    <td>
+                                       <div class="fb-like" data-send="false" data-layout="button_count" data-width="50" data-show-faces="false" data-font="arial"></div>
+                                    </td>
+                                     <td>
+                                       <div class="g-plusone" data-size="medium" data-annotation="none"</div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <button class="btnExample" name="button" id="button" onclick="saveCheckpoint();">Checkpoint!</button>
+                                    </td>
+                                    <td>
+                                        <textarea class ="textareaNoResize" id="styled" onfocus="this.value='';" onkeyup="dataPasted(this);" 
+                                                  onchange="dataPasted(this);" rows="2" cols="30">Paste rankings here...</textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div id="wrapper">
+                                <p style="font-size:large;">Data not yet available. Paste highscores to get output.</p>
+                                <img src="images/ShortInstr.png">
+                            </div> 
+                           <!--<textarea name="rankTextArea"  id="rankTextArea" rows="10" cols="54" readonly></textarea><br/>-->
+                            <!--<textarea name="console"  id="console" rows="10" cols="54"></textarea>-->
+                        </div>
+                        <div class="tab" id="howTo">
+                            <p align="right"><a href="#EN" ><img src="images/en.gif" border="0" alt="EN version"></a> <a href="#PL" ><img src="images/pl.gif" border="0" alt="PL version"></a> </p><br/>
+                            
+                            <a name="EN"></a>
+                            <img src="images/en.gif" border="0" alt="EN version"> Click button below to view interactive tutorial describing Bkble Online basics: <br/><br/>
+                            
+                            <button class="btnTutorial" onclick="window.open('tutorials/basics.htm');"  name="btnTutorial" id="btnTutorial">View basics tutorial.</button><br/><br/>
+                            
+                            Basically idea is to copy each ranking from browser and paste it into field next to "checkpoint"button.<br/><br/>
+                            <b>Procedure</b> is as follows:<br/>
+                            1) Go to Battleknight ranking, copy whole text (ctrl+a, after all selected copy it with ctrl+c),<br/>
+                            2) Go to Bkble Online, click field next to button "checkpoint" and hit paste (ctrl+v). In bottom text area will 
+                            be shown list with each line starting from 0,</br>
+                            3) After few minutes refresh ranking in Battleknight and do point 1 and 2 again. If there were loot change 
+                            on start of knight line at bottom text of Bkble Online area will be something different than zero. 
+                            It means that between first and second ranking check were loot change. Try to attack that knight, you will
+                            have bigger chance that knight will have something on account now ;)
+                           <br/><br/>
+                           <b>Checkpoint button</b> can be used whenever you want. It will make last loots as ones with which comparison 
+                           will be done. To make it clear let assume you are using Bkble Online for 1 hour and there are lots of changes.
+                           It is not obvious which loot has changed lately. Hit "checkpoint" button and comparison will be done from last ranking check. 
+                            <br/><br/>
+                            There is no connection between Bkble Online and Battleknight.  <b>It do not violate game rules</b>. 
+                            Basically using Bkble Online is same as using pen and paper or Excel to count differences.
+                            It is more quick thought and more simple I hope ;) 
+                            Feel free to use it how much you want. <br/><br/>
+                            <b>To reset</b> state just reload this page.<br/><br/>
+                            <b>Tested on</b> Firefox and Chrome.
+                            <br/><br/><br/>
+                            
+                            <a name="PL"></a>
+                            <img src="images/pl.gif" border="0" alt="PL version"> <b>Procedura użycia</b> w "pigułce":<br/>
+                             1) Wejść na stronę rankingu, nacisnąć ctrl+a (lub z menu "zaznacz wszystko") i skopiować tekst do schowka naciskając ctrl+c (lub z menu "kopiuj"). Uwaga: w przeciwieństwie do "starego" Bkble nie trzeba kopiować i wklejać źródła strony, wystarczy tekst na stronie rankingu.<br/>
+                             2) Przejść na stronę Bkble Online i w pole tekstowe na górze po prawej wkleić informacje ze schowka używając ctrl+v (lub "wklej" z menu).<br/>
+                             3) Powtórzyć 1) i 2) po odczekaniu jakiegoś czasu (np. 5 minut) uprzednio odświeżając stronę rankingu. <br/>
+                             4) Powtórzyć 1), 2) i 3) z iloma rankingami się chce i ile razy się chce ;) <br/><br>
+                                 
+                             Tajemniczy <b>przycisk "Checkpoint"</b> służy do zresetowania przyrostów, <b>przycisk "x"</b> przy każdej linii służy do ignorowania rycerza.<br/><br/>
+                             Jeżeli chcecie <b>zresetować całkowicie</b> Bkble Online wejdźcie na stronę ponownie uprzednio ją zamykając bądź kliknijcie w pole adresu przeglądarki i naciśnijcie enter.<br/><br/>
+                             W razie dalszych niejasności możecie spojrzeć na interaktywny samouczek w sekcji angielskiej, bądź napisać do mnie - postaram się pomóc.<br/><br/>
+                             Testowane na Chrome i Firefox.<br/><br/>
+                             Wysokich łupów :D
+                             </br>
+                        </div>
+                        <div class="tab" id="ideasContact">
+                            <h4>You have idea to do similar helping page for different browser game? <br/>
+                            Or maybe you have brand new idea for program which might help during playing different game?<br/> 
+                            See something which can be better in bkble online?<br/>
+                            Share your ideas/reflections with me and if I will do it, I will share it for free :D <br/><br/>
+                            Contact with me <a href="mailto:pisklak83@gmail.com"><font color="blue">pisklak83@gmail.com</font></a>.
+                            </h4>     
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                                var tabber1 = new Yetii({
+                                    id: 'tab-container-1'
+                                });
+                    </script>
+
+                </div>
+
+                <div class="sidebar right">
+
+                    <h3>Links</h3>
+
+                    <ul>
+                        <li><a href="http://volbx.quacktech.com">My project called Volbx</a></li>
+                        <li><a href="http://www.smallprogs.com">Main smallprpogs.com page</a></li>
+                        <li><a href="http://tips-battleknight.pixub.com">Tips - BattleKnight</a></li>
+                    </ul>
+
+
+                    
+                    <h3>Ads</h3>
+                        <center>
+                            <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:160px;height:600px"
+                                 data-ad-client="ca-pub-0172227052232863"
+                                 data-ad-slot="5211362464"></ins>
+                            <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </center>
+                    
+                </div>
+
+                <div class="clear"></div>
+
+            </div>
+           
+            <div id="footer">
+                <ul>
+                    <li><a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a></li>
+                    <li><div class="fb-like" data-send="false" data-layout="button_count" data-width="50" data-show-faces="false" data-font="arial"></div></li>
+                    <li><div class="g-plusone" data-size="medium" data-annotation="none"</div></li>
+                </ul>
+            </div>
+
+            <p class="foot">Copyright &copy; 2013.</p>
+
+        </div>
+
+        <!-- analytics -->
+
+    </body>
+    
+    <!-- Google +1 -->
+    <script type="text/javascript">
+      window.___gcfg = {lang: 'en'};
+
+      (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+    
+    <!--Analytics-->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39376063-4']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+                
+</html>
