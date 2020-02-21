@@ -138,50 +138,6 @@ form {
 #main p,#main h1,#main h2,#main h3,#main h4,#main h5,#main h6 {
   padding-left: 20px; 
   padding-right: 20px;}
-#main fieldset {
-  border: 0;
-  padding: 5px 20px;
-  margin: 0; }
-#main fieldset p {
-  display:block;
-  float:left;
-  clear:both;
-  width:146px;
-  margin: 5px 0;
-  padding: 0;} 
-#main fieldset p.form_input,#main fieldset p.form_textarea {
-  padding: 3px ;
-  background-color: #d6f1f5; }
-#main fieldset input,#main fieldset textarea {
-  font-family:Tahoma,sans-serif;
-  font-size:12px;
-  background-color: #d6f1f5;
-  border: 0;
-  vertical-align:middle;
-  width: 146px; }
-#main fieldset .form_checkbox input {
-  width: auto;
-  padding:2px;
-  background-color:transparent; }
-#main fieldset .form_submit {
-  text-align:right; }
-#main fieldset .form_submit input {
-  width: auto;
-  padding: 7px 14px;
-  font-weight:bold;
-  color: #4690bb; }
-
-#main .content_diff {
-  display: block;
-  position: relative;
-  margin: 5px 0 5px 0;
- padding: 4px 4px 4px 4px;
-  color: #d6f1f5;
-  background-color:#599ec4; }
-#main .content_diff p,#main .content_diff h1,#main .content_diff h2,#main .content_diff h3,#main .content_diff h4,#main .content_diff h5,#main .content_diff h6 {
-  padding-left:4px;
-  padding-right:4px; 
-  color: #d6f1f5; }
 
 #footer {
   margin: 2px 0 20px 0;
