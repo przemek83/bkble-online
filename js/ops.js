@@ -71,7 +71,6 @@ var knightsArray = new Array();
 
 function dataPasted(textarea) {
   var textToParse = textarea.value;
-  var ranks = document.getElementById("rankTextArea");
   var console = document.getElementById("console");
 
   var splitted = textToParse.split(RegExp("\t\n"));
@@ -144,16 +143,8 @@ function createTable() {
   document.getElementById("wrapper").innerHTML = theader + tbody + tfooter;
 }
 
-function printKnights(ranks) {
-  var toPrint = "";
-  for (i = 0; i < knightsArray.length; i++) {
-    toPrint += knightsArray[i].print();
-  }
-  ranks.value = toPrint;
-}
-
 function checkIfKnightInArrayAndUpdate(knight) {
-  for (i = 0; i < knightsArray.length; i++) {
+  for (var i = 0; i < knightsArray.length; i++) {
     if (knightsArray[i].name === knight.name) {
       knight.ignore = knightsArray[i].ignore;
       knight.lootFromCheckPoint = knightsArray[i].lootFromCheckPoint;
@@ -169,16 +160,12 @@ function checkIfKnightInArrayAndUpdate(knight) {
 function saveCheckpoint() {
   var console = document.getElementById("console");
   if (console !== null) console.value = console.value + "Checkpoint saved\n";
-  for (i = 0; i < knightsArray.length; i++) {
+  for (var i = 0; i < knightsArray.length; i++) {
     knightsArray[i].lootFromCheckPoint = knightsArray[i].loot;
     knightsArray[i].lootDiff = 0;
   }
 
   createTable();
-}
-
-function setbg(color) {
-  document.getElementById("styled").style.background = color;
 }
 
 function ignoreKnight(number) {
