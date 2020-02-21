@@ -77,24 +77,24 @@ a:hover {
 table {
   border-collapse: separate;
   border-spacing: 2px;
-  margin: 10px;
+  margin: 5px;
   text-align: left;
 }
 
 th {
   font-weight: bold;
   background-color: #4690bb;
-  padding: 10px 20px;
+  padding: 5px 10px;
 }
 
 td {
   background-color: #4690bb;
-  padding: 10px 20px;
+  padding: 5px 10px;
 }
 
 ul {
   margin: 0;
-  padding: 10px 10px 10px 30px;
+  padding: 5px 5px 5px 5px;
   list-style-type: disc;
 }
 
