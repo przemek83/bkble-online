@@ -242,11 +242,7 @@ p.foot a:hover {
     border-radius: 10px;
 }
 
-#tab-container-1 #pomoce{ background: #4690bb }
-#tab-container-1 #instrukcja{ background: #4690bb }
-#tab-container-1 #uruchamianieJar{ background: #4690bb }
-
-.btnExample, .btnTutorial, .btnIgnore {
+.btnExample, .btnIgnore {
   color: #900;
   background: #FF0;
   font-weight: bold;
@@ -255,7 +251,7 @@ p.foot a:hover {
 
 }
  
-.btnExample:hover, .btnTutorial:hover{
+.btnExample:hover{
   color: #FFF;
   background: #900
 }
@@ -263,23 +259,6 @@ p.foot a:hover {
 .btnExample{
   height: 50px;
   width: 100px;
-}
-
-.btnIgnore{
-    border-radius: 10px;
-    border: 1px solid #cccccc;
-    font: 9px Arial;
-    font-weight: bold;
-}
-
-.btnIgnore:hover {
-    color: #FFF;
-    background: red;
-}
-  
-btnTutorial{
-    height: 100px;
-    width: 200px;
 }
 
 textarea, .textareaNoResize {
@@ -306,41 +285,3 @@ textarea:focus, input:focus {
      border-radius: 10px;
      outline: none;
 }
-
-
-#rounded-corner
-{
-    text-align: left;
-    width: 510px;
-    border-radius: 10px;
-    border-collapse: collapse;
-    -moz-box-sizing: border-box;
-    overflow:hidden;
-}
-
-#rounded-corner th
-{
-    padding: 4px;
-    text-align: center;
-    font-weight: normal;
-    font-size: 16px;
-    color: #039;
-    background: #b9c9fe;
-}
-
-#rounded-corner td
-{
-    padding: 1px;
-    background: #e8edff;
-    color: #669;
-    font-size: 11px;
-    border-right: 1px solid #4690bb;
-    border-left: 1px solid #4690bb;
-    background-clip: padding-box;
-}
-
-#rounded-corner tbody tr:hover td
-{
-    background: #d0dafd;
-}
-
