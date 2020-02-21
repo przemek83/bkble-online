@@ -142,14 +142,16 @@ form {
   border-radius: 10px;
   background-position: 0 0;}
 #footer ul {
-  display: block;
+  list-style-type: none;
+  justify-content: center;
+  display: flex;
   float: left;
   clear: left;
   margin:0;
   padding: 30px 0 50px 0;
   width:995px;
   text-align: center;
-  list-style:none;
+  list-style:none; 
   font-weight:bold;
   font-size:13px;   
   background-repeat:no-repeat; 
