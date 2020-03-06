@@ -7,5 +7,9 @@
 # How it works
 Battleknight players copies ranking page and paste into tool. Each time new ranking is pasted, tool calculates changes of so called loot (inner Battleknight currency). Additional button called "Checkpoint!" is used for treating current state as reference one and counting future loot increase based on it.  
 Of course same thing can be done using pencil + paper or spreadsheet but web tool is lite, quick and available everywhere.  
-Tool in web and Java standalone app is used by players since 2006.  
+Tool in web form is used by players since 2013, Java standalone app (Bkble) since 2006.  
 
+# Technicalities
+Bbkble online is a mix of HTML, CSS and Java Script.   
+Visuals are based on free template found in web around 2013, tabbing mechanism on Yetii (Yet (E)Another JavaScript Tab Interface Implementation). Logic is created in JS and there are also some JS script injections from Facebook, Twitter, Google+ (when it was alive), Google Analytics and Google Ads.  
+Main logic can be found in `js/ops.js`.
