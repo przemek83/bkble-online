@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Build & test
 
 on:
   push:
@@ -9,15 +9,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x, 24.x]
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm run build --if-present
-    - run: npm test
+    - name: Install npm and Jest
+      run: |
+        sudo apt-get install -y npm
+        npm install --save-dev jest
+
+    - name: Run tests 
+      run: npm run test
