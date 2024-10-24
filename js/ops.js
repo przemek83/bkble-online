@@ -2,7 +2,12 @@ function Knight(knightAsString) {
   var afterSplit = knightAsString.trim().split(/\t/g);
   this.name = afterSplit[0].replace(/\[.*\]/g, "");
   this.order = afterSplit[0].match(/\[.*\]/g);
-  if (this.order === null) this.order = "";
+  
+  if (this.order === null) 
+    this.order = "";
+  else
+    this.order = this.order[0]
+
   var fromIndex;
   if (afterSplit.length === 7) fromIndex = 2;
   else fromIndex = 1;
@@ -172,3 +177,11 @@ function ignoreKnight(number) {
   knightsArray[number].ignore = true;
   createTable();
 }
+
+
+module.exports = {
+  dataPasted,
+  Knight,
+  // Add other functions as needed
+};
+
