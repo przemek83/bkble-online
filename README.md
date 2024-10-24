@@ -1,5 +1,6 @@
 [![Build & test](https://github.com/przemek83/bkble-online/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/przemek83/bkble-online/actions/workflows/build-and-test.yml)
 [![CodeQL](https://github.com/przemek83/bkble-online/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/przemek83/bkble-online/actions/workflows/github-code-scanning/codeql)
+[![codecov](https://codecov.io/github/przemek83/bkble-online/graph/badge.svg?token=25DETP2QR1)](https://codecov.io/github/przemek83/bkble-online)
 
 # About project
  Online tool for browser game BattleKnight in form of web page with logic in Java Script. It allows to monitor changes in ranking and helps in decision whom to challenge to the duel.  
