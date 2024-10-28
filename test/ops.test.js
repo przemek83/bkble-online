@@ -46,31 +46,36 @@ describe('Knight', () => {
     expect(knight.lootDiff).toBe(2000);
   });
 
-  test('should create row correctly knight with order', () => {
-    const knight = new toTest.Knight(knightWithOrderText);
-    const row = toTest.createRow(knight, 1);
-    
-    expect(row).toBe('<td>0</td><td>62</td><td>Arcyksiążę MichalOprych </td><td>[IMP]</td><td>198</td><td>499.653.242</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
-  });
-
-  test('should create row correctly knight without order', () => {
-    const knight = new toTest.Knight(knightWithoutOrderText);
-    const row = toTest.createRow(knight, 1);
-    
-    expect(row).toBe('<td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
-  });
-
-  test('should print correctly knight with order', () => {
+  test('should print correctly for knight with order', () => {
     const knight = new toTest.Knight(knightWithOrderText);
     const output = knight.print();
   
     expect(output).toBe('0 62 Arcyksiążę MichalOprych  [IMP] 198 499.653.242\n');
   });
 
-  test('should print correctly knight without order', () => {
+  test('should print correctly for knight without order', () => {
     const knight = new toTest.Knight(knightWithoutOrderText);
     const output = knight.print();
   
     expect(output).toBe('0 20 Arcyksiążę William  299 1.041.479.270\n');
+  });
+});
+
+describe('Output', () => {
+  const knightWithOrderText = 'Arcyksiążę MichalOprych [IMP]\t198\t499.653.242\t169.323\t150.225\t15.954\n63';
+  const knightWithoutOrderText = 'Arcyksiążę William\t299\t1.041.479.270\t130.162\t127.406\t2.209\n21';
+
+   test('should create row correctly for knight with order', () => {
+    const knight = new toTest.Knight(knightWithOrderText);
+    const row = toTest.createRow(knight, 1);
+    
+    expect(row).toBe('<td>0</td><td>62</td><td>Arcyksiążę MichalOprych </td><td>[IMP]</td><td>198</td><td>499.653.242</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
+  });
+
+  test('should create row correctly for knight without order', () => {
+    const knight = new toTest.Knight(knightWithoutOrderText);
+    const row = toTest.createRow(knight, 1);
+    
+    expect(row).toBe('<td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
   });
 });
