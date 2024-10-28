@@ -1,76 +1,79 @@
-function Knight(knightAsString) {
-  var afterSplit = knightAsString.trim().split(/\t/g);
-  this.name = afterSplit[0].replace(/\[.*\]/g, "");
-  this.order = afterSplit[0].match(/\[.*\]/g);
-  
-  if (this.order === null) 
-    this.order = "";
-  else
-    this.order = this.order[0]
+class Knight {
+  constructor(knightAsString) {
+    var afterSplit = knightAsString.trim().split(/\t/g);
+    this.name = afterSplit[0].replace(/\[.*\]/g, "");
+    this.order = afterSplit[0].match(/\[.*\]/g);
 
-  var fromIndex;
-  if (afterSplit.length === 7) fromIndex = 2;
-  else fromIndex = 1;
-  this.level = afterSplit[fromIndex].trim();
-  this.lootText = String(afterSplit[fromIndex + 1]);
-  this.loot = Number(afterSplit[fromIndex + 1].replace(/\./g, "").trim());
-  this.fights = Number(afterSplit[fromIndex + 2].replace(/\./g, "").trim());
-  this.win = Number(afterSplit[fromIndex + 3].replace(/\./g, "").trim());
-  this.place = Number(afterSplit[fromIndex + 4].match(/\n.*/g)) - 1;
-  this.loose = Number(
-    afterSplit[fromIndex + 4]
-      .replace(/\./g, "")
-      .replace(/\n.*/g, "")
-      .trim()
-  );
-  this.lootFromCheckPoint = 0;
-  this.lootDiff = 0;
-  this.ignore = false;
+    if (this.order === null)
+      this.order = "";
 
-  this.print = function() {
-    return (
-      this.lootDiff +
-      " " +
-      this.place +
-      " " +
-      this.name +
-      " " +
-      this.order +
-      " " +
-      this.level +
-      " " +
-      this.lootText +
-      "\n"
+    else
+      this.order = this.order[0];
+
+    var fromIndex;
+    if (afterSplit.length === 7) fromIndex = 2;
+    else fromIndex = 1;
+    this.level = afterSplit[fromIndex].trim();
+    this.lootText = String(afterSplit[fromIndex + 1]);
+    this.loot = Number(afterSplit[fromIndex + 1].replace(/\./g, "").trim());
+    this.fights = Number(afterSplit[fromIndex + 2].replace(/\./g, "").trim());
+    this.win = Number(afterSplit[fromIndex + 3].replace(/\./g, "").trim());
+    this.place = Number(afterSplit[fromIndex + 4].match(/\n.*/g)) - 1;
+    this.loose = Number(
+      afterSplit[fromIndex + 4]
+        .replace(/\./g, "")
+        .replace(/\n.*/g, "")
+        .trim()
     );
-  };
+    this.lootFromCheckPoint = 0;
+    this.lootDiff = 0;
+    this.ignore = false;
 
-  this.createRow = function(row) {
-    var tbodyString = "";
-    tbodyString += "<td>";
-    tbodyString += this.lootDiff;
-    tbodyString += "</td><td>";
-    tbodyString += this.place;
-    tbodyString += "</td><td>";
-    tbodyString += this.name;
-    tbodyString += "</td><td>";
-    tbodyString += this.order;
-    tbodyString += "</td><td>";
-    tbodyString += this.level;
-    tbodyString += "</td><td>";
-    tbodyString += this.lootText;
-    tbodyString += "</td><td>";
-    tbodyString +=
-      '<center><button class="btnIgnore" name="button" id="button" onclick="ignoreKnight(' +
-      row +
-      ');">x</button></center>';
-    tbodyString += "</td>";
-    return tbodyString;
-  };
+    this.print = function () {
+      return (
+        this.lootDiff +
+        " " +
+        this.place +
+        " " +
+        this.name +
+        " " +
+        this.order +
+        " " +
+        this.level +
+        " " +
+        this.lootText +
+        "\n"
+      );
+    };
+  }
 
-  this.calculateLootDiff = function() {
+  calculateLootDiff() {
     this.lootDiff = this.loot - this.lootFromCheckPoint;
   };
 }
+
+function createRow(knight, row) {
+  var tbodyString = "";
+  tbodyString += "<td>";
+  tbodyString += knight.lootDiff;
+  tbodyString += "</td><td>";
+  tbodyString += knight.place;
+  tbodyString += "</td><td>";
+  tbodyString += knight.name;
+  tbodyString += "</td><td>";
+  tbodyString += knight.order;
+  tbodyString += "</td><td>";
+  tbodyString += knight.level;
+  tbodyString += "</td><td>";
+  tbodyString += knight.lootText;
+  tbodyString += "</td><td>";
+  tbodyString +=
+    '<center><button class="btnIgnore" name="button" id="button" onclick="ignoreKnight(' +
+    row +
+    ');">x</button></center>';
+  tbodyString += "</td>";
+  return tbodyString;
+};
 
 var knightsArray = new Array();
 
@@ -140,7 +143,7 @@ function createTable() {
     if (knightsArray[i].ignore === true) continue;
 
     tbody += "<tr>";
-    tbody += knightsArray[i].createRow(i);
+    tbody += createRow(knightsArray[i], i);
     tbody += "</tr>\n";
   }
   tbody += "</tbody>";
@@ -182,6 +185,7 @@ function ignoreKnight(number) {
 module.exports = {
   dataPasted,
   Knight,
-  // Add other functions as needed
+  compare,
+  createRow
 };
 

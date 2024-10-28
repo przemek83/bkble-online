@@ -48,14 +48,14 @@ describe('Knight', () => {
 
   test('should create row correctly knight with order', () => {
     const knight = new toTest.Knight(knightWithOrderText);
-    const row = knight.createRow(1);
+    const row = toTest.createRow(knight, 1);
     
     expect(row).toBe('<td>0</td><td>62</td><td>Arcyksiążę MichalOprych </td><td>[IMP]</td><td>198</td><td>499.653.242</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
   });
 
   test('should create row correctly knight without order', () => {
     const knight = new toTest.Knight(knightWithoutOrderText);
-    const row = knight.createRow(1);
+    const row = toTest.createRow(knight, 1);
     
     expect(row).toBe('<td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
   });
