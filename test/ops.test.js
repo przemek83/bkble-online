@@ -79,3 +79,25 @@ describe('Output', () => {
     expect(row).toBe('<td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
   });
 });
+
+describe('Utils', () => {
+  const knightWithOrderText = 'Arcyksiążę MichalOprych [IMP]\t198\t499.653.242\t169.323\t150.225\t15.954\n63';
+  const knightWithoutOrderText = 'Arcyksiążę William\t299\t1.041.479.270\t130.162\t127.406\t2.209\n21';
+
+  const firstKnight = new toTest.Knight(knightWithOrderText)
+  firstKnight.lootDiff = 1
+  const secondKnight = new toTest.Knight(knightWithoutOrderText)
+  secondKnight.lootDiff = 2
+
+   test('compare left loot diff greater', () => {
+    expect(toTest.compare(firstKnight,secondKnight)).toBe(1)
+  });
+
+  test('compare left loot diff lower', () => {
+    expect(toTest.compare(secondKnight,firstKnight)).toBe(-1)
+  });
+
+  test('compare left loot diff greater', () => {
+    expect(toTest.compare(firstKnight,firstKnight)).toBe(0)
+  });
+});
