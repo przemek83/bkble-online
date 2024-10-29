@@ -78,6 +78,18 @@ describe('Output', () => {
     
     expect(row).toBe('<td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
   });
+
+  const knights = new Array();
+  knights[0] = new toTest.Knight(knightWithOrderText);
+  knights[1] = new toTest.Knight(knightWithoutOrderText);
+
+  test('should create table with 2 knights', () => {
+    const table = toTest.createTable(knights)
+    
+    expect(table).toBe('<table id=\"rounded-corner\" ><tbody><thead><tr><th scope=\"col\">Increase</th><th scope=\"col\">Place</th><th scope=\"col\">Knight</th><th scope=\"col\">Order</th><th scope=\"col\">Level</th><th scope=\"col\">Loot</th><th scope=\"col\">Ignore</th></tr></thead><tr><td>0</td><td>62</td><td>Arcyksiążę MichalOprych </td><td>[IMP]</td><td>198</td><td>499.653.242</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(0);\">x</button></center></td></tr>\n\
+<tr><td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td></tr>\n\
+</tbody></table>');
+  });
 });
 
 describe('Utils', () => {

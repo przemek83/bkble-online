@@ -111,7 +111,7 @@ function dataPasted(textarea) {
 
   knightsArray.sort(compare);
 
-  createTable();
+  document.getElementById("wrapper").innerHTML = createTable(knightsArray);
 
   textarea.value = "";
 }
@@ -126,7 +126,7 @@ function compare(a, b) {
   return 0;
 }
 
-function createTable() {
+function createTable(knights) {
   var theader = '<table id="rounded-corner" >';
   var tbody = "<tbody>";
   tbody += "<thead><tr>";
@@ -139,16 +139,16 @@ function createTable() {
   tbody += '<th scope="col">Ignore</th>';
   tbody += "</tr>";
   tbody += "</thead>";
-  for (var i = 0; i < knightsArray.length; i++) {
-    if (knightsArray[i].ignore === true) continue;
+  for (var i = 0; i < knights.length; i++) {
+    if (knights[i].ignore === true) continue;
 
     tbody += "<tr>";
-    tbody += createRow(knightsArray[i], i);
+    tbody += createRow(knights[i], i);
     tbody += "</tr>\n";
   }
   tbody += "</tbody>";
   var tfooter = "</table>";
-  document.getElementById("wrapper").innerHTML = theader + tbody + tfooter;
+  return theader + tbody + tfooter;
 }
 
 function checkIfKnightInArrayAndUpdate(knight) {
@@ -173,12 +173,12 @@ function saveCheckpoint() {
     knightsArray[i].lootDiff = 0;
   }
 
-  createTable();
+  document.getElementById("wrapper").innerHTML = createTable(knightsArray);
 }
 
 function ignoreKnight(number) {
   knightsArray[number].ignore = true;
-  createTable();
+  document.getElementById("wrapper").innerHTML = createTable(knightsArray);
 }
 
 
@@ -186,6 +186,7 @@ module.exports = {
   dataPasted,
   Knight,
   compare,
-  createRow
+  createRow,
+  createTable
 };
 
