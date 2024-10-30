@@ -127,6 +127,16 @@ describe('Data pasting', () => {
     
     expect(document.getElementById("wrapper").innerHTML).toBe(expected)
   });
+
+  test('paste second time rank without changes', () => {
+    toTest.dataPasted(input)
+    toTest.dataPasted(input)
+
+    const filePath = path.join(__dirname, 'data/Top100_base_expected.txt');
+    const expected = fs.readFileSync(filePath, 'utf8');
+    
+    expect(document.getElementById("wrapper").innerHTML).toBe(expected)
+  });
 });
 
 describe('Utils', () => {
