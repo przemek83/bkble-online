@@ -1,4 +1,6 @@
 const toTest = require('../js/ops.js');
+const fs = require('fs');
+const path = require('path');
 
 describe('Knight', () => {
   const knightWithOrderText = 'Arcyksiążę MichalOprych [IMP]\t198\t499.653.242\t169.323\t150.225\t15.954\n63';
@@ -89,6 +91,41 @@ describe('Output', () => {
     expect(table).toBe('<table id=\"rounded-corner\" ><tbody><thead><tr><th scope=\"col\">Increase</th><th scope=\"col\">Place</th><th scope=\"col\">Knight</th><th scope=\"col\">Order</th><th scope=\"col\">Level</th><th scope=\"col\">Loot</th><th scope=\"col\">Ignore</th></tr></thead><tr><td>0</td><td>62</td><td>Arcyksiążę MichalOprych </td><td>[IMP]</td><td>198</td><td>499.653.242</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(0);\">x</button></center></td></tr>\n\
 <tr><td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td></tr>\n\
 </tbody></table>');
+  });
+});
+
+describe('Data pasting', () => {
+  let originalConsole;
+
+  beforeAll(() => {
+    originalConsole = { ...console };
+    console.log = jest.fn();
+  });
+
+  afterAll(() => {
+    console.log = originalConsole.log;
+  });
+
+  document.body.innerHTML = '<div id="wrapper"></div>';
+
+  const filePath = path.join(__dirname, 'data/Top100_base.txt');
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+
+  const input = document.createElement('textarea');
+  input.value = fileContent
+
+  test('should process pasted data and set "" as textarea content', () => {
+    toTest.dataPasted(input)
+    expect(input.value).toBe('')
+  });
+
+  test('should create table with 100 knights', () => {
+    toTest.dataPasted(input)
+
+    const filePath = path.join(__dirname, 'data/Top100_base_expected.txt');
+    const expected = fs.readFileSync(filePath, 'utf8');
+    
+    expect(document.getElementById("wrapper").innerHTML).toBe(expected)
   });
 });
 

@@ -79,15 +79,11 @@ var knightsArray = new Array();
 
 function dataPasted(textarea) {
   var textToParse = textarea.value;
-  var console = document.getElementById("console");
-
   var splitted = textToParse.split(RegExp("\t\n"));
-  if (console !== null)
-    console.value =
-      console.value + "splitted has " + splitted.length + " lines\n";
+  console.log("splitted has " + splitted.length + " lines");
 
   if (splitted.length !== 103 && splitted.length !== 107) {
-    if (console !== null) console.value = console.value + "error of split\n";
+    console.log("error of split");
     textarea.value = "";
     return;
   }
