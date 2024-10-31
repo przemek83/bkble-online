@@ -152,6 +152,29 @@ describe('Data pasting', () => {
     
     expect(document.getElementById("wrapper").innerHTML).toBe(expected)
   });
+
+  test('should update loots after checkpoint and pasting second update', () => {
+    toTest.dataPasted(input)
+
+    let filePath = path.join(__dirname, 'data/Top100_first_update.txt');
+    const first_update = fs.readFileSync(filePath, 'utf8');
+
+    input.value = first_update
+    toTest.dataPasted(input)
+
+    toTest.saveCheckpoint()
+
+    filePath = path.join(__dirname, 'data/Top100_second_update.txt');
+    const second_update = fs.readFileSync(filePath, 'utf8');
+
+    input.value = second_update
+    toTest.dataPasted(input)
+
+    filePath = path.join(__dirname, 'data/Top100_second_update_expected.txt');
+    const expected = fs.readFileSync(filePath, 'utf8');
+    
+    expect(document.getElementById("wrapper").innerHTML).toBe(expected)
+  });
 });
 
 describe('Utils', () => {

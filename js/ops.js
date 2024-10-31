@@ -183,6 +183,7 @@ module.exports = {
   Knight,
   compare,
   createRow,
-  createTable
+  createTable,
+  saveCheckpoint
 };
 
