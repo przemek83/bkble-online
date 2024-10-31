@@ -137,6 +137,21 @@ describe('Data pasting', () => {
     
     expect(document.getElementById("wrapper").innerHTML).toBe(expected)
   });
+
+  test('should update loots after laoding updated data', () => {
+    toTest.dataPasted(input)
+
+    let filePath = path.join(__dirname, 'data/Top100_first_update.txt');
+    const first_update = fs.readFileSync(filePath, 'utf8');
+
+    input.value = first_update
+    toTest.dataPasted(input)
+
+    filePath = path.join(__dirname, 'data/Top100_first_update_expected.txt');
+    const expected = fs.readFileSync(filePath, 'utf8');
+    
+    expect(document.getElementById("wrapper").innerHTML).toBe(expected)
+  });
 });
 
 describe('Utils', () => {
