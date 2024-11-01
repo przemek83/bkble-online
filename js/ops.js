@@ -79,7 +79,7 @@ var knightsArray = new Array();
 
 function dataPasted(textarea) {
   const textToParse = textarea.value;
-  const splitted = textToParse.split(RegExp("\t\n"));
+  const splitted = textToParse.split(/\t\n/);
   console.log("splitted has " + splitted.length + " lines");
 
   if (splitted.length !== 103 && splitted.length !== 107) {
@@ -164,9 +164,9 @@ function checkIfKnightInArrayAndUpdate(knight) {
 function saveCheckpoint() {
   console.log("Checkpoint saved");
 
-  for (let i = 0; i < knightsArray.length; i++) {
-    knightsArray[i].lootFromCheckPoint = knightsArray[i].loot;
-    knightsArray[i].lootDiff = 0;
+  for (const knight of knightsArray) {
+    knight.lootFromCheckPoint = knight.loot;
+    knight.lootDiff = 0;
   }
 
   document.getElementById("wrapper").innerHTML = createTable(knightsArray);
