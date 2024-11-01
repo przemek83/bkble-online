@@ -2,10 +2,10 @@ const toTest = require('../js/ops.js');
 const fs = require('fs');
 const path = require('path');
 
-describe('Knight', () => {
-  const knightWithOrderText = 'Arcyksiążę MichalOprych [IMP]\t198\t499.653.242\t169.323\t150.225\t15.954\n63';
-  const knightWithoutOrderText = 'Arcyksiążę William\t299\t1.041.479.270\t130.162\t127.406\t2.209\n21';
+const knightWithOrderText = '62\tArcyksiążę MichalOprych [IMP]\t198\t499.653.242\t169.323\t150.225\t15.954';
+const knightWithoutOrderText = '20\tArcyksiążę William\t299\t1.041.479.270\t130.162\t127.406\t2.209';
 
+describe('Knight', () => {
   test('Knight in order creation', () => {
     const knight = new toTest.Knight(knightWithOrderText);
     
@@ -64,9 +64,6 @@ describe('Knight', () => {
 });
 
 describe('Output', () => {
-  const knightWithOrderText = 'Arcyksiążę MichalOprych [IMP]\t198\t499.653.242\t169.323\t150.225\t15.954\n63';
-  const knightWithoutOrderText = 'Arcyksiążę William\t299\t1.041.479.270\t130.162\t127.406\t2.209\n21';
-
    test('should create row correctly for knight with order', () => {
     const knight = new toTest.Knight(knightWithOrderText);
     const row = toTest.createRow(knight, 1);

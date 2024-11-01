@@ -1,26 +1,24 @@
 class Knight {
   constructor(knightAsString) {
-    const afterSplit = knightAsString.trim().split(/\t/g);
-    this.name = afterSplit[0].replace(/\[.*\]/g, "");
-    this.order = afterSplit[0].match(/\[.*\]/g);
+    const fields = knightAsString.trim().split(/\t/g);
+
+    this.place = Number(fields[0])
+
+    this.name = fields[1].replace(/\[.*\]/g, "");
+    this.order = fields[1].match(/\[.*\]/g);
 
     if (this.order === null)
       this.order = "";
-
     else
       this.order = this.order[0];
 
-    let fromIndex;
-    if (afterSplit.length === 7) fromIndex = 2;
-    else fromIndex = 1;
-    this.level = afterSplit[fromIndex].trim();
-    this.lootText = String(afterSplit[fromIndex + 1]);
-    this.loot = Number(afterSplit[fromIndex + 1].replace(/\./g, "").trim());
-    this.fights = Number(afterSplit[fromIndex + 2].replace(/\./g, "").trim());
-    this.win = Number(afterSplit[fromIndex + 3].replace(/\./g, "").trim());
-    this.place = Number(afterSplit[fromIndex + 4].match(/\n.*/g)) - 1;
+    this.level = fields[fields.length - 5].trim();
+    this.lootText = String(fields[fields.length - 4]);
+    this.loot = Number(fields[fields.length - 4].replace(/\./g, "").trim());
+    this.fights = Number(fields[fields.length - 3].replace(/\./g, "").trim());
+    this.win = Number(fields[fields.length - 2].replace(/\./g, "").trim());
     this.loose = Number(
-      afterSplit[fromIndex + 4]
+      fields[fields.length - 1]
         .replace(/\./g, "")
         .replace(/\n.*/g, "")
         .trim()
@@ -77,32 +75,42 @@ function createRow(knight, row) {
 
 var knightsArray = new Array();
 
+function isNumber(value) {
+  return !isNaN(value.replace(/\./g, "").trim());
+}
+
+function isValidKnightString(knightString) {
+  const fields = knightString.split('\t')
+  if(fields.length != 7 && fields.length != 8)
+    return false
+
+  const firstFieldIsNumber = isNumber(fields[0])
+  const last5FieldsAreNumbers = isNumber(fields[fields.length - 1]) &&
+                                isNumber(fields[fields.length - 2]) &&
+                                isNumber(fields[fields.length - 3]) &&
+                                isNumber(fields[fields.length - 4]) &&
+                                isNumber(fields[fields.length - 5])
+
+  return firstFieldIsNumber && last5FieldsAreNumbers
+}
+
 function dataPasted(textarea) {
-  const textToParse = textarea.value;
-  const splitted = textToParse.split(/\t\n/);
-  console.log("splitted has " + splitted.length + " lines");
+  let textToParse = textarea.value;
+  textToParse = textToParse.replace(/\t\n/g, '\t')
+  const lines = textToParse.split(/\n/);
+  console.log("splitted has " + lines.length + " lines");
 
-  if (splitted.length !== 103 && splitted.length !== 107) {
-    console.log("error of split");
-    textarea.value = "";
-    return;
-  }
+  if(lines.length == 0)    
+    return
 
-  let slip = 0;
-  if (splitted.length === 103) slip = 3;
-  else slip = 7;
+  for (const line of lines) {
+    if(!isValidKnightString(line))
+      continue
 
-  let lastPlace = 0;
-  for (let i = 0; i < 100; i++) {
-    const knight = new Knight(splitted[slip + i]);
+    const knight = new Knight(line);
 
-    if (i === 98) lastPlace = knight.place;
-
-    if (i === 99) knight.place = lastPlace + 1;
-
-    if (false === checkIfKnightInArrayAndUpdate(knight)) {
+    if (!checkIfKnightInArrayAndUpdate(knight))
       knightsArray[knightsArray.length] = knight;
-    }
   }
 
   knightsArray.sort(compare);
