@@ -108,9 +108,9 @@ describe('Data pasting', () => {
   const input = document.createElement('textarea');
 
   beforeEach(() => {
-    toTest.knightsArray = new Array();
     document.body.innerHTML = '<div id="wrapper"></div>';
     input.value = fileContent
+    toTest.resetKnightsArray()
   });
 
   test('should process pasted data and set "" as textarea content', () => {
@@ -137,7 +137,7 @@ describe('Data pasting', () => {
     expect(document.getElementById("wrapper").innerHTML).toBe(expected)
   });
 
-  test('should update loots after laoding updated data', () => {
+  test('should update loots after loading updated data', () => {
     toTest.dataPasted(input)
 
     let filePath = path.join(__dirname, 'data/Top100_first_update.txt');
@@ -177,14 +177,11 @@ describe('Data pasting', () => {
 
   test('should ignore', () => {
     toTest.dataPasted(input)
-    toTest.ignoreKnight(99)
-    toTest.ignoreKnight(98)
+    toTest.ignoreKnight(5)
 
     const filePath = path.join(__dirname, 'data/Top100_ignore_expected.txt');
     const expected = fs.readFileSync(filePath, 'utf8');
 
-    console.log(document.getElementById("wrapper").innerHTML)
-    
     expect(document.getElementById("wrapper").innerHTML).toBe(expected)
   });
 });
@@ -208,5 +205,52 @@ describe('Utils', () => {
 
   test('compare left loot diff greater', () => {
     expect(toTest.compare(firstKnight,firstKnight)).toBe(0)
+  });
+});
+
+describe('Big ranks', () => {
+  let originalConsole;
+
+  beforeAll(() => {
+    originalConsole = { ...console };
+    console.log = jest.fn();
+  });
+
+  afterAll(() => {
+    console.log = originalConsole.log;
+  });
+
+  const filePath = path.join(__dirname, 'data/Top2000_base.txt');
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const input = document.createElement('textarea');
+
+  beforeEach(() => {
+    document.body.innerHTML = '<div id="wrapper"></div>';
+    input.value = fileContent
+    toTest.resetKnightsArray()
+  });
+
+  test('should create table with 2000 knights', () => {
+    toTest.dataPasted(input)
+
+    const filePath = path.join(__dirname, 'data/Top2000_base_expected.txt');
+    const expected = fs.readFileSync(filePath, 'utf8');
+    
+    expect(document.getElementById("wrapper").innerHTML).toBe(expected)
+  });
+
+  test('should update loots after loading updated data', () => {
+    toTest.dataPasted(input)
+
+    const updatePath = path.join(__dirname, 'data/Top2000_update.txt');
+    const update = fs.readFileSync(updatePath, 'utf8');
+
+    input.value = update
+    toTest.dataPasted(input)
+
+    const expectedPath = path.join(__dirname, 'data/Top2000_update_expected.txt');
+    const expected = fs.readFileSync(expectedPath, 'utf8');
+    
+    expect(document.getElementById("wrapper").innerHTML).toBe(expected)
   });
 });

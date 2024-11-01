@@ -75,6 +75,14 @@ function createRow(knight, row) {
 
 var knightsArray = new Array();
 
+function resetKnightsArray() {
+  knightsArray = [];
+}
+
+function getKnights(){
+  return knightsArray
+}
+
 function isNumber(value) {
   return !isNaN(value.replace(/\./g, "").trim());
 }
@@ -110,10 +118,10 @@ function dataPasted(textarea) {
     const knight = new Knight(line);
 
     if (!checkIfKnightInArrayAndUpdate(knight))
-      knightsArray[knightsArray.length] = knight;
+      getKnights()[knightsArray.length] = knight;
   }
 
-  knightsArray.sort(compare);
+  getKnights().sort(compare);
 
   document.getElementById("wrapper").innerHTML = createTable(knightsArray);
 
@@ -156,12 +164,12 @@ function createTable(knights) {
 }
 
 function checkIfKnightInArrayAndUpdate(knight) {
-  for (let i = 0; i < knightsArray.length; i++) {
-    if (knightsArray[i].name === knight.name) {
-      knight.ignore = knightsArray[i].ignore;
-      knight.lootFromCheckPoint = knightsArray[i].lootFromCheckPoint;
+  for (let i = 0; i < getKnights().length; i++) {
+    if (getKnights()[i].name === knight.name) {
+      knight.ignore = getKnights()[i].ignore;
+      knight.lootFromCheckPoint = getKnights()[i].lootFromCheckPoint;
       knight.calculateLootDiff();
-      knightsArray[i] = knight;
+      getKnights()[i] = knight;
       return true;
     }
   }
@@ -172,17 +180,17 @@ function checkIfKnightInArrayAndUpdate(knight) {
 function saveCheckpoint() {
   console.log("Checkpoint saved");
 
-  for (const knight of knightsArray) {
+  for (const knight of getKnights()) {
     knight.lootFromCheckPoint = knight.loot;
     knight.lootDiff = 0;
   }
 
-  document.getElementById("wrapper").innerHTML = createTable(knightsArray);
+  document.getElementById("wrapper").innerHTML = createTable(getKnights());
 }
 
 function ignoreKnight(number) {
-  knightsArray[number].ignore = true;
-  document.getElementById("wrapper").innerHTML = createTable(knightsArray);
+  getKnights()[number].ignore = true;
+  document.getElementById("wrapper").innerHTML = createTable(getKnights());
 }
 
 
@@ -193,6 +201,7 @@ module.exports = {
   createRow,
   createTable,
   saveCheckpoint,
-  ignoreKnight
+  ignoreKnight,
+  resetKnightsArray
 };
 
