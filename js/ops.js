@@ -1,6 +1,6 @@
 class Knight {
   constructor(knightAsString) {
-    var afterSplit = knightAsString.trim().split(/\t/g);
+    const afterSplit = knightAsString.trim().split(/\t/g);
     this.name = afterSplit[0].replace(/\[.*\]/g, "");
     this.order = afterSplit[0].match(/\[.*\]/g);
 
@@ -10,7 +10,7 @@ class Knight {
     else
       this.order = this.order[0];
 
-    var fromIndex;
+    let fromIndex;
     if (afterSplit.length === 7) fromIndex = 2;
     else fromIndex = 1;
     this.level = afterSplit[fromIndex].trim();
@@ -53,7 +53,7 @@ class Knight {
 }
 
 function createRow(knight, row) {
-  var tbodyString = "";
+  let tbodyString = "";
   tbodyString += "<td>";
   tbodyString += knight.lootDiff;
   tbodyString += "</td><td>";
@@ -78,8 +78,8 @@ function createRow(knight, row) {
 var knightsArray = new Array();
 
 function dataPasted(textarea) {
-  var textToParse = textarea.value;
-  var splitted = textToParse.split(RegExp("\t\n"));
+  const textToParse = textarea.value;
+  const splitted = textToParse.split(RegExp("\t\n"));
   console.log("splitted has " + splitted.length + " lines");
 
   if (splitted.length !== 103 && splitted.length !== 107) {
@@ -88,13 +88,13 @@ function dataPasted(textarea) {
     return;
   }
 
-  var slip = 0;
+  let slip = 0;
   if (splitted.length === 103) slip = 3;
   else slip = 7;
 
-  var lastPlace = 0;
-  for (var i = 0; i < 100; i++) {
-    var knight = new Knight(splitted[slip + i]);
+  let lastPlace = 0;
+  for (let i = 0; i < 100; i++) {
+    const knight = new Knight(splitted[slip + i]);
 
     if (i === 98) lastPlace = knight.place;
 
@@ -123,8 +123,8 @@ function compare(a, b) {
 }
 
 function createTable(knights) {
-  var theader = '<table id="rounded-corner" >';
-  var tbody = "<tbody>";
+  const theader = '<table id="rounded-corner" >';
+  let tbody = "<tbody>";
   tbody += "<thead><tr>";
   tbody += '<th scope="col">Increase</th>';
   tbody += '<th scope="col">Place</th>';
@@ -135,7 +135,7 @@ function createTable(knights) {
   tbody += '<th scope="col">Ignore</th>';
   tbody += "</tr>";
   tbody += "</thead>";
-  for (var i = 0; i < knights.length; i++) {
+  for (let i = 0; i < knights.length; i++) {
     if (knights[i].ignore === true) continue;
 
     tbody += "<tr>";
@@ -143,12 +143,12 @@ function createTable(knights) {
     tbody += "</tr>\n";
   }
   tbody += "</tbody>";
-  var tfooter = "</table>";
+  const tfooter = "</table>";
   return theader + tbody + tfooter;
 }
 
 function checkIfKnightInArrayAndUpdate(knight) {
-  for (var i = 0; i < knightsArray.length; i++) {
+  for (let i = 0; i < knightsArray.length; i++) {
     if (knightsArray[i].name === knight.name) {
       knight.ignore = knightsArray[i].ignore;
       knight.lootFromCheckPoint = knightsArray[i].lootFromCheckPoint;
@@ -162,9 +162,9 @@ function checkIfKnightInArrayAndUpdate(knight) {
 }
 
 function saveCheckpoint() {
-  var console = document.getElementById("console");
-  if (console !== null) console.value = console.value + "Checkpoint saved\n";
-  for (var i = 0; i < knightsArray.length; i++) {
+  console.log("Checkpoint saved");
+
+  for (let i = 0; i < knightsArray.length; i++) {
     knightsArray[i].lootFromCheckPoint = knightsArray[i].loot;
     knightsArray[i].lootDiff = 0;
   }
