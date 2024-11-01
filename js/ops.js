@@ -105,7 +105,7 @@ function isValidKnightString(knightString) {
 function dataPasted(textarea) {
   let textToParse = textarea.value;
   textToParse = textToParse.replace(/\t\n/g, '\t')
-  const lines = textToParse.split(/\n/);
+  const lines = textToParse.split(/\n/).filter(line => line.trim() !== "");
   console.log("splitted has " + lines.length + " lines");
 
   if(lines.length == 0)    
