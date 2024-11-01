@@ -184,6 +184,7 @@ module.exports = {
   compare,
   createRow,
   createTable,
-  saveCheckpoint
+  saveCheckpoint,
+  ignoreKnight
 };
 

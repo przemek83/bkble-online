@@ -106,13 +106,15 @@ describe('Data pasting', () => {
     console.log = originalConsole.log;
   });
 
-  document.body.innerHTML = '<div id="wrapper"></div>';
-
   const filePath = path.join(__dirname, 'data/Top100_base.txt');
   const fileContent = fs.readFileSync(filePath, 'utf8');
-
   const input = document.createElement('textarea');
-  input.value = fileContent
+
+  beforeEach(() => {
+    toTest.knightsArray = new Array();
+    document.body.innerHTML = '<div id="wrapper"></div>';
+    input.value = fileContent
+  });
 
   test('should process pasted data and set "" as textarea content', () => {
     toTest.dataPasted(input)
@@ -172,6 +174,19 @@ describe('Data pasting', () => {
 
     filePath = path.join(__dirname, 'data/Top100_second_update_expected.txt');
     const expected = fs.readFileSync(filePath, 'utf8');
+    
+    expect(document.getElementById("wrapper").innerHTML).toBe(expected)
+  });
+
+  test('should ignore', () => {
+    toTest.dataPasted(input)
+    toTest.ignoreKnight(99)
+    toTest.ignoreKnight(98)
+
+    const filePath = path.join(__dirname, 'data/Top100_ignore_expected.txt');
+    const expected = fs.readFileSync(filePath, 'utf8');
+
+    console.log(document.getElementById("wrapper").innerHTML)
     
     expect(document.getElementById("wrapper").innerHTML).toBe(expected)
   });
