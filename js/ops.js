@@ -34,26 +34,23 @@ class Knight {
   };
 }
 
-function createRow(knight, row) {
-  let tbodyString = '';
-  tbodyString += '<td>';
-  tbodyString += knight.lootDiff;
-  tbodyString += '</td><td>';
-  tbodyString += knight.place;
-  tbodyString += '</td><td>';
-  tbodyString += knight.name;
-  tbodyString += '</td><td>';
-  tbodyString += knight.order;
-  tbodyString += '</td><td>';
-  tbodyString += knight.level;
-  tbodyString += '</td><td>';
-  tbodyString += knight.lootText;
-  tbodyString += '</td><td>';
-  tbodyString +=
+function addCell(content) {
+  return '<td>' + content + '</td>'
+}
+
+function createRow(knight, rowNumber) {
+  let row = '';
+  row += addCell(knight.lootDiff)
+  row += addCell(knight.place)
+  row += addCell(knight.name)
+  row += addCell(knight.order)
+  row += addCell(knight.level)
+  row += addCell(knight.lootText)
+  const ignoreButton =
       '<center><button class="btnIgnore" name="button" id="button" onclick="ignoreKnight(' +
-      row + ');">x</button></center>';
-  tbodyString += '</td>';
-  return tbodyString;
+      rowNumber + ');">x</button></center>';
+  row += addCell(ignoreButton)
+  return row;
 };
 
 var knightsArray = new Array();
