@@ -4,44 +4,28 @@ class Knight {
 
     this.place = Number(fields[0])
 
-    this.name = fields[1].replace(/\[.*\]/g, "");
+                     this.name = fields[1].replace(/\[.*\]/g, '');
     this.order = fields[1].match(/\[.*\]/g);
 
     if (this.order === null)
-      this.order = "";
+      this.order = '';
     else
       this.order = this.order[0];
 
     this.level = fields[fields.length - 5].trim();
     this.lootText = String(fields[fields.length - 4]);
-    this.loot = Number(fields[fields.length - 4].replace(/\./g, "").trim());
-    this.fights = Number(fields[fields.length - 3].replace(/\./g, "").trim());
-    this.win = Number(fields[fields.length - 2].replace(/\./g, "").trim());
-    this.loose = Number(
-      fields[fields.length - 1]
-        .replace(/\./g, "")
-        .replace(/\n.*/g, "")
-        .trim()
-    );
+    this.loot = Number(fields[fields.length - 4].replace(/\./g, '').trim());
+    this.fights = Number(fields[fields.length - 3].replace(/\./g, '').trim());
+    this.win = Number(fields[fields.length - 2].replace(/\./g, '').trim());
+    this.loose = Number(fields[fields.length - 1].replace(/\./g, '').trim());
     this.lootFromCheckPoint = 0;
     this.lootDiff = 0;
     this.ignore = false;
 
-    this.print = function () {
+    this.print = function() {
       return (
-        this.lootDiff +
-        " " +
-        this.place +
-        " " +
-        this.name +
-        " " +
-        this.order +
-        " " +
-        this.level +
-        " " +
-        this.lootText +
-        "\n"
-      );
+          this.lootDiff + ' ' + this.place + ' ' + this.name + ' ' +
+          this.order + ' ' + this.level + ' ' + this.lootText + '\n');
     };
   }
 
@@ -51,25 +35,24 @@ class Knight {
 }
 
 function createRow(knight, row) {
-  let tbodyString = "";
-  tbodyString += "<td>";
+  let tbodyString = '';
+  tbodyString += '<td>';
   tbodyString += knight.lootDiff;
-  tbodyString += "</td><td>";
+  tbodyString += '</td><td>';
   tbodyString += knight.place;
-  tbodyString += "</td><td>";
+  tbodyString += '</td><td>';
   tbodyString += knight.name;
-  tbodyString += "</td><td>";
+  tbodyString += '</td><td>';
   tbodyString += knight.order;
-  tbodyString += "</td><td>";
+  tbodyString += '</td><td>';
   tbodyString += knight.level;
-  tbodyString += "</td><td>";
+  tbodyString += '</td><td>';
   tbodyString += knight.lootText;
-  tbodyString += "</td><td>";
+  tbodyString += '</td><td>';
   tbodyString +=
-    '<center><button class="btnIgnore" name="button" id="button" onclick="ignoreKnight(' +
-    row +
-    ');">x</button></center>';
-  tbodyString += "</td>";
+      '<center><button class="btnIgnore" name="button" id="button" onclick="ignoreKnight(' +
+      row + ');">x</button></center>';
+  tbodyString += '</td>';
   return tbodyString;
 };
 
@@ -79,25 +62,25 @@ function resetKnightsArray() {
   knightsArray = [];
 }
 
-function getKnights(){
+function getKnights() {
   return knightsArray
 }
 
 function isNumber(value) {
-  return !isNaN(value.replace(/\./g, "").trim());
+  return !isNaN(value.replace(/\./g, '').trim());
 }
 
 function isValidKnightString(knightString) {
   const fields = knightString.split('\t')
-  if(fields.length != 7 && fields.length != 8)
+  if (fields.length != 7 && fields.length != 8) {
     return false
+  }
 
   const firstFieldIsNumber = isNumber(fields[0])
   const last5FieldsAreNumbers = isNumber(fields[fields.length - 1]) &&
-                                isNumber(fields[fields.length - 2]) &&
-                                isNumber(fields[fields.length - 3]) &&
-                                isNumber(fields[fields.length - 4]) &&
-                                isNumber(fields[fields.length - 5])
+      isNumber(fields[fields.length - 2]) &&
+      isNumber(fields[fields.length - 3]) &&
+      isNumber(fields[fields.length - 4]) && isNumber(fields[fields.length - 5])
 
   return firstFieldIsNumber && last5FieldsAreNumbers
 }
@@ -105,27 +88,30 @@ function isValidKnightString(knightString) {
 function dataPasted(textarea) {
   let textToParse = textarea.value;
   textToParse = textToParse.replace(/\t\n/g, '\t')
-  const lines = textToParse.split(/\n/).filter(line => line.trim() !== "");
-  console.log("splitted has " + lines.length + " lines");
+  const lines = textToParse.split(/\n/).filter(line => line.trim() !== '');
+  console.log('splitted has ' + lines.length + ' lines');
 
-  if(lines.length == 0)    
+  if (lines.length == 0) {
     return
+  }
 
   for (const line of lines) {
-    if(!isValidKnightString(line))
+    if (!isValidKnightString(line)) {
       continue
+    }
 
     const knight = new Knight(line);
 
-    if (!checkIfKnightInArrayAndUpdate(knight))
+    if (!checkIfKnightInArrayAndUpdate(knight)) {
       getKnights()[knightsArray.length] = knight;
+    }
   }
 
   getKnights().sort(compare);
 
-  document.getElementById("wrapper").innerHTML = createTable(knightsArray);
+  document.getElementById('wrapper').innerHTML = createTable(knightsArray);
 
-  textarea.value = "";
+  textarea.value = '';
 }
 
 function compare(a, b) {
@@ -140,8 +126,8 @@ function compare(a, b) {
 
 function createTable(knights) {
   const theader = '<table id="rounded-corner" >';
-  let tbody = "<tbody>";
-  tbody += "<thead><tr>";
+  let tbody = '<tbody>';
+  tbody += '<thead><tr>';
   tbody += '<th scope="col">Increase</th>';
   tbody += '<th scope="col">Place</th>';
   tbody += '<th scope="col">Knight</th>';
@@ -149,17 +135,17 @@ function createTable(knights) {
   tbody += '<th scope="col">Level</th>';
   tbody += '<th scope="col">Loot</th>';
   tbody += '<th scope="col">Ignore</th>';
-  tbody += "</tr>";
-  tbody += "</thead>";
+  tbody += '</tr>';
+  tbody += '</thead>';
   for (let i = 0; i < knights.length; i++) {
     if (knights[i].ignore === true) continue;
 
-    tbody += "<tr>";
+    tbody += '<tr>';
     tbody += createRow(knights[i], i);
-    tbody += "</tr>\n";
+    tbody += '</tr>\n';
   }
-  tbody += "</tbody>";
-  const tfooter = "</table>";
+  tbody += '</tbody>';
+  const tfooter = '</table>';
   return theader + tbody + tfooter;
 }
 
@@ -178,19 +164,19 @@ function checkIfKnightInArrayAndUpdate(knight) {
 }
 
 function saveCheckpoint() {
-  console.log("Checkpoint saved");
+  console.log('Checkpoint saved');
 
   for (const knight of getKnights()) {
     knight.lootFromCheckPoint = knight.loot;
     knight.lootDiff = 0;
   }
 
-  document.getElementById("wrapper").innerHTML = createTable(getKnights());
+  document.getElementById('wrapper').innerHTML = createTable(getKnights());
 }
 
 function ignoreKnight(number) {
   getKnights()[number].ignore = true;
-  document.getElementById("wrapper").innerHTML = createTable(getKnights());
+  document.getElementById('wrapper').innerHTML = createTable(getKnights());
 }
 
 
@@ -204,4 +190,3 @@ module.exports = {
   ignoreKnight,
   resetKnightsArray
 };
-
