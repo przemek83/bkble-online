@@ -49,21 +49,6 @@ describe('Knight', () => {
 
     expect(knight.lootDiff).toBe(2000);
   });
-
-  test('should print correctly for knight with order', () => {
-    const knight = new toTest.Knight(knightWithOrderText);
-    const output = knight.print();
-
-    expect(output).toBe(
-        '0 62 Arcyksiążę MichalOprych  [IMP] 198 499.653.242\n');
-  });
-
-  test('should print correctly for knight without order', () => {
-    const knight = new toTest.Knight(knightWithoutOrderText);
-    const output = knight.print();
-
-    expect(output).toBe('0 20 Arcyksiążę William  299 1.041.479.270\n');
-  });
 });
 
 describe('Output', () => {

@@ -20,12 +20,6 @@ class Knight {
     this.lootFromCheckPoint = this.loot;
     this.lootDiff = 0;
     this.ignore = false;
-
-    this.print = function() {
-      return (
-          this.lootDiff + ' ' + this.place + ' ' + this.name + ' ' +
-          this.order + ' ' + this.level + ' ' + this.lootText + '\n');
-    };
   }
 
   calculateLootDiff() {
