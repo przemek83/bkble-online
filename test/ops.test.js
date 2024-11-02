@@ -20,7 +20,7 @@ describe('Knight', () => {
     expect(knight.win).toBe(150225);
     expect(knight.place).toBe(62);
     expect(knight.loose).toBe(15954);
-    expect(knight.lootFromCheckPoint).toBe(0);
+    expect(knight.lootFromCheckPoint).toBe(499653242);
     expect(knight.lootDiff).toBe(0);
     expect(knight.ignore).toBe(false);
   });
@@ -37,7 +37,7 @@ describe('Knight', () => {
     expect(knight.win).toBe(127406);
     expect(knight.place).toBe(20);
     expect(knight.loose).toBe(2209);
-    expect(knight.lootFromCheckPoint).toBe(0);
+    expect(knight.lootFromCheckPoint).toBe(1041479270);
     expect(knight.lootDiff).toBe(0);
     expect(knight.ignore).toBe(false);
   });

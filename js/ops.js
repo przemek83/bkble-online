@@ -2,9 +2,8 @@ class Knight {
   constructor(knightAsString) {
     const fields = knightAsString.trim().split(/\t/g);
 
-    this.place = Number(fields[0])
-
-                     this.name = fields[1].replace(/\[.*\]/g, '');
+    this.place = Number(fields[0]);
+    this.name = fields[1].replace(/\[.*\]/g, '');
     this.order = fields[1].match(/\[.*\]/g);
 
     if (this.order === null)
@@ -18,7 +17,7 @@ class Knight {
     this.fights = Number(fields[fields.length - 3].replace(/\./g, '').trim());
     this.win = Number(fields[fields.length - 2].replace(/\./g, '').trim());
     this.loose = Number(fields[fields.length - 1].replace(/\./g, '').trim());
-    this.lootFromCheckPoint = 0;
+    this.lootFromCheckPoint = this.loot;
     this.lootDiff = 0;
     this.ignore = false;
 
@@ -82,6 +81,19 @@ function isValidKnightString(knightString) {
   return firstFieldIsNumber && last5FieldsAreNumbers
 }
 
+function addKnight(knight) {
+  const knights = getKnights()
+  const index = knights.findIndex(item => item.name === knight.name);
+  if (index !== -1) {
+    knight.ignore = knights[index].ignore;
+    knight.lootFromCheckPoint = knights[index].lootFromCheckPoint;
+    knight.calculateLootDiff();
+    knights[index] = knight;
+  } else {
+    knights[knights.length] = knight;
+  }
+}
+
 function dataPasted(textarea) {
   let textToParse = textarea.value;
   textToParse = textToParse.replace(/\t\n/g, '\t')
@@ -97,16 +109,12 @@ function dataPasted(textarea) {
       continue
     }
 
-    const knight = new Knight(line);
-
-    if (!checkIfKnightInArrayAndUpdate(knight)) {
-      getKnights()[knightsArray.length] = knight;
-    }
+    addKnight(new Knight(line))
   }
 
   getKnights().sort(compare);
 
-  document.getElementById('wrapper').innerHTML = createTable(knightsArray);
+  document.getElementById('wrapper').innerHTML = createTable(getKnights());
 
   textarea.value = '';
 }
@@ -144,20 +152,6 @@ function createTable(knights) {
   tbody += '</tbody>';
   const tfooter = '</table>';
   return theader + tbody + tfooter;
-}
-
-function checkIfKnightInArrayAndUpdate(knight) {
-  for (let i = 0; i < getKnights().length; i++) {
-    if (getKnights()[i].name === knight.name) {
-      knight.ignore = getKnights()[i].ignore;
-      knight.lootFromCheckPoint = getKnights()[i].lootFromCheckPoint;
-      knight.calculateLootDiff();
-      getKnights()[i] = knight;
-      return true;
-    }
-  }
-  knight.lootFromCheckPoint = knight.loot;
-  return false;
 }
 
 function saveCheckpoint() {
