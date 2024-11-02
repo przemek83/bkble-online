@@ -34,22 +34,22 @@ class Knight {
   };
 }
 
-function addCell(content) {
+function createCell(content) {
   return '<td>' + content + '</td>'
 }
 
 function createRow(knight, rowNumber) {
   let row = '';
-  row += addCell(knight.lootDiff)
-  row += addCell(knight.place)
-  row += addCell(knight.name)
-  row += addCell(knight.order)
-  row += addCell(knight.level)
-  row += addCell(knight.lootText)
+  row += createCell(knight.lootDiff)
+  row += createCell(knight.place)
+  row += createCell(knight.name)
+  row += createCell(knight.order)
+  row += createCell(knight.level)
+  row += createCell(knight.lootText)
   const ignoreButton =
       '<center><button class="btnIgnore" name="button" id="button" onclick="ignoreKnight(' +
       rowNumber + ');">x</button></center>';
-  row += addCell(ignoreButton)
+  row += createCell(ignoreButton)
   return row;
 };
 
