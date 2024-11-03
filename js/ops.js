@@ -62,9 +62,7 @@ function isNumber(value) {
 
 function isValidKnightString(knightString) {
   const fields = knightString.split('\t')
-  if (fields.length != 7 && fields.length != 8) {
-    return false
-  }
+  if (fields.length != 7 && fields.length != 8) return false;
 
   const firstFieldIsNumber = isNumber(fields[0])
   const last5FieldsAreNumbers = isNumber(fields[fields.length - 1]) &&
@@ -94,15 +92,10 @@ function dataPasted(textarea) {
   const lines = textToParse.split(/\n/).filter(line => line.trim() !== '');
   console.log('splitted has ' + lines.length + ' lines');
 
-  if (lines.length == 0) {
-    return
-  }
+  if (lines.length == 0) return;
 
   for (const line of lines) {
-    if (!isValidKnightString(line)) {
-      continue
-    }
-
+    if (!isValidKnightString(line)) continue;
     addKnight(new Knight(line))
   }
 
@@ -114,12 +107,8 @@ function dataPasted(textarea) {
 }
 
 function compare(a, b) {
-  if (a.lootDiff < b.lootDiff) {
-    return 1;
-  }
-  if (a.lootDiff > b.lootDiff) {
-    return -1;
-  }
+  if (a.lootDiff < b.lootDiff) return 1;
+  if (a.lootDiff > b.lootDiff) return -1;
   return 0;
 }
 
