@@ -2,6 +2,12 @@
 [![CodeQL](https://github.com/przemek83/bkble-online/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/przemek83/bkble-online/actions/workflows/github-code-scanning/codeql)
 [![codecov](https://codecov.io/github/przemek83/bkble-online/graph/badge.svg?token=25DETP2QR1)](https://codecov.io/github/przemek83/bkble-online)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=przemek83_bkble-online&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=przemek83_bkble-online)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=przemek83_bkble-online&metric=bugs)](https://sonarcloud.io/summary/new_code?id=przemek83_bkble-online)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=przemek83_bkble-online&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=przemek83_bkble-online)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=przemek83_bkble-online&metric=coverage)](https://sonarcloud.io/summary/new_code?id=przemek83_bkble-online)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=przemek83_bkble-online&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=przemek83_bkble-online)
+
 # About project
  Online tool for browser game BattleKnight in form of web page with logic in Java Script. It allows to monitor changes in ranking and helps in decision whom to challenge to the duel.  
 
