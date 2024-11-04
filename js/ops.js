@@ -3,7 +3,7 @@ class Knight {
     const fields = knightAsString.trim().split(/\t/g);
 
     this.place = Number(fields[0]);
-    this.name = fields[1].replace(/\[.*\]/g, '');
+    this.name = fields[1].replace(/\[.*\]/g, '').trim();
     this.order = fields[1].match(/\[.*\]/g);
 
     if (this.order === null)
@@ -31,7 +31,7 @@ function createCell(content) {
   return '<td>' + content + '</td>'
 }
 
-function createRow(knight, rowNumber) {
+function createRow(knight) {
   let row = '';
   row += createCell(knight.lootDiff)
   row += createCell(knight.place)
@@ -40,20 +40,23 @@ function createRow(knight, rowNumber) {
   row += createCell(knight.level)
   row += createCell(knight.lootText)
   const ignoreButton =
-      '<center><button class="btnIgnore" name="button" id="button" onclick="ignoreKnight(' +
-      rowNumber + ');">x</button></center>';
+      '<center><button class="btnIgnore" name="button" id="button" onclick="ignoreKnight(\'' +
+      knight.name + '\');">x</button></center>';
   row += createCell(ignoreButton)
   return row;
 };
 
-var knightsArray = new Array();
+var knightsMap = new Map();
+knightsMap[Symbol.iterator] = function*() {
+  yield* [...this.entries()].sort((a, b) => b[1].lootDiff - a[1].lootDiff);
+};
 
 function resetKnightsArray() {
-  knightsArray = [];
+  knightsMap.clear()
 }
 
 function getKnights() {
-  return knightsArray
+  return knightsMap
 }
 
 function isNumber(value) {
@@ -75,15 +78,12 @@ function isValidKnightString(knightString) {
 
 function addKnight(knight) {
   const knights = getKnights()
-  const index = knights.findIndex(item => item.name === knight.name);
-  if (index !== -1) {
-    knight.ignore = knights[index].ignore;
-    knight.lootFromCheckPoint = knights[index].lootFromCheckPoint;
+  if (knights.has(knight.name)) {
+    knight.ignore = knights.get(knight.name).ignore;
+    knight.lootFromCheckPoint = knights.get(knight.name).lootFromCheckPoint;
     knight.calculateLootDiff();
-    knights[index] = knight;
-  } else {
-    knights[knights.length] = knight;
   }
+  knights.set(knight.name, knight);
 }
 
 function dataPasted(textarea) {
@@ -99,17 +99,9 @@ function dataPasted(textarea) {
     addKnight(new Knight(line))
   }
 
-  getKnights().sort(compare);
-
   document.getElementById('wrapper').innerHTML = createTable(getKnights());
 
   textarea.value = '';
-}
-
-function compare(a, b) {
-  if (a.lootDiff < b.lootDiff) return 1;
-  if (a.lootDiff > b.lootDiff) return -1;
-  return 0;
 }
 
 function createTable(knights) {
@@ -124,14 +116,15 @@ function createTable(knights) {
   tbody += '<th scope="col">Loot</th>';
   tbody += '<th scope="col">Ignore</th>';
   tbody += '</tr>';
-  tbody += '</thead>';
-  for (let i = 0; i < knights.length; i++) {
-    if (knights[i].ignore === true) continue;
+  tbody += '</thead>\n';
+  for (const [, knight] of knights) {
+    if (knight.ignore === true) continue;
 
     tbody += '<tr>';
-    tbody += createRow(knights[i], i);
+    tbody += createRow(knight);
     tbody += '</tr>\n';
   }
+
   tbody += '</tbody>';
   const tfooter = '</table>';
   return theader + tbody + tfooter;
@@ -140,7 +133,7 @@ function createTable(knights) {
 function saveCheckpoint() {
   console.log('Checkpoint saved');
 
-  for (const knight of getKnights()) {
+  for (const [, knight] of getKnights()) {
     knight.lootFromCheckPoint = knight.loot;
     knight.lootDiff = 0;
   }
@@ -148,8 +141,9 @@ function saveCheckpoint() {
   document.getElementById('wrapper').innerHTML = createTable(getKnights());
 }
 
-function ignoreKnight(number) {
-  getKnights()[number].ignore = true;
+function ignoreKnight(name) {
+  console.log(getKnights().get(name))
+  getKnights().get(name).ignore = true;
   document.getElementById('wrapper').innerHTML = createTable(getKnights());
 }
 
@@ -157,7 +151,6 @@ function ignoreKnight(number) {
 module.exports = {
   dataPasted,
   Knight,
-  compare,
   createRow,
   createTable,
   saveCheckpoint,

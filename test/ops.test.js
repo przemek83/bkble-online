@@ -11,7 +11,7 @@ describe('Knight', () => {
   test('Knight in order creation', () => {
     const knight = new toTest.Knight(knightWithOrderText);
 
-    expect(knight.name).toBe('Arcyksiążę MichalOprych ');
+    expect(knight.name).toBe('Arcyksiążę MichalOprych');
     expect(knight.order).toBe('[IMP]');
     expect(knight.level).toBe('198');
     expect(knight.lootText).toBe('499.653.242');
@@ -54,30 +54,34 @@ describe('Knight', () => {
 describe('Output', () => {
   test('should create row correctly for knight with order', () => {
     const knight = new toTest.Knight(knightWithOrderText);
-    const row = toTest.createRow(knight, 1);
+    const row = toTest.createRow(knight);
 
     expect(row).toBe(
-        '<td>0</td><td>62</td><td>Arcyksiążę MichalOprych </td><td>[IMP]</td><td>198</td><td>499.653.242</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
+        '<td>0</td><td>62</td><td>Arcyksiążę MichalOprych</td><td>[IMP]</td><td>198</td><td>499.653.242</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(\'Arcyksiążę MichalOprych\');\">x</button></center></td>');
   });
 
   test('should create row correctly for knight without order', () => {
     const knight = new toTest.Knight(knightWithoutOrderText);
-    const row = toTest.createRow(knight, 1);
+    const row = toTest.createRow(knight);
 
     expect(row).toBe(
-        '<td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td>');
+        '<td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(\'Arcyksiążę William\');\">x</button></center></td>');
   });
 
-  const knights = new Array();
-  knights[0] = new toTest.Knight(knightWithOrderText);
-  knights[1] = new toTest.Knight(knightWithoutOrderText);
+  const knights = new Map();
+  const knight1 = new toTest.Knight(knightWithOrderText);
+  const knight2 = new toTest.Knight(knightWithoutOrderText);
+
+  knights.set(knight1.name, knight1)
+  knights.set(knight2.name, knight2)
 
   test('should create table with 2 knights', () => {
     const table = toTest.createTable(knights)
 
     expect(table).toBe(
-        '<table id=\"rounded-corner\" ><tbody><thead><tr><th scope=\"col\">Increase</th><th scope=\"col\">Place</th><th scope=\"col\">Knight</th><th scope=\"col\">Order</th><th scope=\"col\">Level</th><th scope=\"col\">Loot</th><th scope=\"col\">Ignore</th></tr></thead><tr><td>0</td><td>62</td><td>Arcyksiążę MichalOprych </td><td>[IMP]</td><td>198</td><td>499.653.242</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(0);\">x</button></center></td></tr>\n\
-<tr><td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(1);\">x</button></center></td></tr>\n\
+        '<table id=\"rounded-corner\" ><tbody><thead><tr><th scope=\"col\">Increase</th><th scope=\"col\">Place</th><th scope=\"col\">Knight</th><th scope=\"col\">Order</th><th scope=\"col\">Level</th><th scope=\"col\">Loot</th><th scope=\"col\">Ignore</th></tr></thead>\n\
+<tr><td>0</td><td>62</td><td>Arcyksiążę MichalOprych</td><td>[IMP]</td><td>198</td><td>499.653.242</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(\'Arcyksiążę MichalOprych\');\">x</button></center></td></tr>\n\
+<tr><td>0</td><td>20</td><td>Arcyksiążę William</td><td></td><td>299</td><td>1.041.479.270</td><td><center><button class=\"btnIgnore\" name=\"button\" id=\"button\" onclick=\"ignoreKnight(\'Arcyksiążę William\');\">x</button></center></td></tr>\n\
 </tbody></table>');
   });
 });
@@ -171,37 +175,13 @@ describe('Data pasting', () => {
 
     test('should ignore', () => {
       toTest.dataPasted(input)
-      toTest.ignoreKnight(5)
+      toTest.ignoreKnight('Arcyksiążę Armani')
 
       const filePath = path.join(__dirname, 'data/Top100_ignore_expected.txt');
       const expected = fs.readFileSync(filePath, 'utf8');
 
       expect(document.getElementById('wrapper').innerHTML).toBe(expected)
     });
-});
-
-describe('Utils', () => {
-  const knightWithOrderText =
-      'Arcyksiążę MichalOprych [IMP]\t198\t499.653.242\t169.323\t150.225\t15.954\n63';
-  const knightWithoutOrderText =
-      'Arcyksiążę William\t299\t1.041.479.270\t130.162\t127.406\t2.209\n21';
-
-  const firstKnight = new toTest.Knight(knightWithOrderText)
-  firstKnight.lootDiff = 1
-  const secondKnight = new toTest.Knight(knightWithoutOrderText)
-  secondKnight.lootDiff = 2
-
-  test(
-      'compare left loot diff greater',
-      () => {expect(toTest.compare(firstKnight, secondKnight)).toBe(1)});
-
-  test(
-      'compare left loot diff lower',
-      () => {expect(toTest.compare(secondKnight, firstKnight)).toBe(-1)});
-
-  test(
-      'compare left loot diff greater',
-      () => {expect(toTest.compare(firstKnight, firstKnight)).toBe(0)});
 });
 
 describe('Big ranks', () => {
