@@ -7,20 +7,28 @@ function getOrder(nameWithOrder) {
   return ''
 }
 
+function removeDots(input) {
+  return input.replaceAll('.', '')
+}
+
+function stringToNumber(input) {
+  return Number(removeDots(input).trim())
+}
+
 class Knight {
   constructor(knightAsString) {
-    const fields = knightAsString.trim().split(/\t/g);
+    const fields = knightAsString.trim().split('\t');
 
-    this.place = Number(fields[0]);
+    this.place = stringToNumber(fields[0]);
     this.order = getOrder(fields[1]);
     this.name = fields[1].replace(this.order, '').trim();
 
     this.level = fields[fields.length - 5].trim();
     this.lootText = String(fields[fields.length - 4]);
-    this.loot = Number(fields[fields.length - 4].replace(/\./g, '').trim());
-    this.fights = Number(fields[fields.length - 3].replace(/\./g, '').trim());
-    this.win = Number(fields[fields.length - 2].replace(/\./g, '').trim());
-    this.loose = Number(fields[fields.length - 1].replace(/\./g, '').trim());
+    this.loot = stringToNumber(fields[fields.length - 4]);
+    this.fights = stringToNumber(fields[fields.length - 3]);
+    this.win = stringToNumber(fields[fields.length - 2]);
+    this.loose = stringToNumber(fields[fields.length - 1]);
     this.lootFromCheckPoint = this.loot;
     this.lootDiff = 0;
     this.ignore = false;
@@ -64,7 +72,7 @@ function getKnights() {
 }
 
 function isNumber(value) {
-  return !isNaN(value.replace(/\./g, '').trim());
+  return !isNaN(removeDots(value).trim());
 }
 
 function isValidKnightString(knightString) {
@@ -92,8 +100,8 @@ function addKnight(knight) {
 
 function dataPasted(textarea) {
   let textToParse = textarea.value;
-  textToParse = textToParse.replace(/\t\n/g, '\t')
-  const lines = textToParse.split(/\n/).filter(line => line.trim() !== '');
+  textToParse = textToParse.replaceAll('\t\n', '\t')
+  const lines = textToParse.split('\n').filter(line => line.trim() !== '');
   console.log('splitted has ' + lines.length + ' lines');
 
   if (lines.length == 0) return;
