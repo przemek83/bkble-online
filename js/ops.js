@@ -1,15 +1,19 @@
+function getOrder(nameWithOrder) {
+  if (nameWithOrder.includes('[')) {
+    const orderStartIndex = nameWithOrder.indexOf('[')
+    const orderEndIndex = nameWithOrder.lastIndexOf(']') + 1;
+    return nameWithOrder.substring(orderStartIndex, orderEndIndex)
+  }
+  return ''
+}
+
 class Knight {
   constructor(knightAsString) {
     const fields = knightAsString.trim().split(/\t/g);
 
     this.place = Number(fields[0]);
-    this.name = fields[1].replace(/\[.*\]/g, '').trim();
-    this.order = fields[1].match(/\[.*\]/g);
-
-    if (this.order === null)
-      this.order = '';
-    else
-      this.order = this.order[0];
+    this.order = getOrder(fields[1]);
+    this.name = fields[1].replace(this.order, '').trim();
 
     this.level = fields[fields.length - 5].trim();
     this.lootText = String(fields[fields.length - 4]);
