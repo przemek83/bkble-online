@@ -34,10 +34,10 @@ The project uses the following open-source software:
 | Jest | MIT | https://github.com/jestjs/jest | JavaScript testing solution |
 
 # Testing
-Test are located in `test` dir and can be run using `jest` tool. Examnple run:
+Test are located in `tests` dir and can be run using `jest` tool. Examnple run:
 
     $ npx jest
-    PASS  test/ops.test.js (7.785 s)
+    PASS  tests/ops.test.js (7.785 s)
     Knight
         ✓ Knight in order creation (2 ms)
         ✓ Knight without order creation (1 ms)
