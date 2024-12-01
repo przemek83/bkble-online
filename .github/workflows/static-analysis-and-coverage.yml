@@ -1,32 +1,8 @@
 name: Static analysis and coverage
 
-on: 
-  push
+on: [push, pull_request]
 
 jobs:
-  test:
-    name: Run tests and collect coverage
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install npm and Jest
-        run: |
-          sudo apt-get install -y npm
-          npm install --save-dev jest
-
-      - name: Run tests
-        run: npx jest --coverage
-
-      - name: Upload results to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env: 
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  analyze:
+    uses: przemek83/workflows/.github/workflows/static-analysis-and-coverage-js.yml@main
+    secrets: inherit
