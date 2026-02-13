@@ -1,8 +1,13 @@
 name: Static analysis and coverage
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
 
 jobs:
   analyze:
     uses: przemek83/workflows/.github/workflows/static-analysis-and-coverage-js.yml@main
-    secrets: inherit
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
