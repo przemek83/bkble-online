@@ -8,6 +8,4 @@ permissions:
 jobs:
   analyze:
     uses: przemek83/workflows/.github/workflows/static-analysis-and-coverage-js.yml@main
-    secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    secrets: inherit
